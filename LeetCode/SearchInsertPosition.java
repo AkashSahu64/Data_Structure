@@ -3,22 +3,30 @@ package LeetCode;
 import java.util.*;
 
 public class SearchInsertPosition {
-    public int searchInsert(int[] nums, int target) {
-        int index = 0;
-        if(nums.length == 0){
-            return 0;
-        }
-        for (int i = 0; i < nums.length; i++){
-            if (nums[i] == target){
-                index = i;
+    public static int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right){
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target){
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
             }else {
-                index = i + 1;
+                right = mid - 1;
             }
         }
-        return  index;
+        return left;
     }
 
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] arr = new int[n];
+        for(int i = 0; i<arr.length; i++){
+            arr[i] = sc.nextInt();
+        }
+        int target = sc.nextInt();
+        System.out.println(searchInsert(arr, target));
     }
 }
